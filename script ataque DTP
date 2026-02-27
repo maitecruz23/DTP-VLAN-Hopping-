@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+from scapy.all import *
+import os
+import time
+
+INTERFAZ = "eth0"
+
+print("="*60)
+print(" 🚀 INICIANDO ATAQUE VTP (SCAPY + YERSINIA) - ITLA 🚀 ")
+print("="*60)
+
+# 1. USO DE SCAPY
+print(f"[*] Scapy analizando la interfaz {INTERFAZ}...")
+print("[*] Esperando interceptar un paquete VTP del Switch...")
+
+try:
+    # Capturamos 1 paquete para verificar
+    # Filtro basado en la MAC de destino multicast de Cisco para VTP: 01:00:0c:cc:cc:cc
+    paquete = sniff(iface=INTERFAZ, filter="ether dst 01:00:0c:cc:cc:cc", count=1, timeout=10)
+
+    if paquete:
+        print("\n[+] ¡ÉXITO! Scapy interceptó el paquete VTP.")
+    else:
+        print("\n[!] Scapy no detectó VTP (Time out), pero lanzaremos Yersinia")
+
+except Exception as e:
+    print(f"\n[!] Error en Scapy: {e}")
+
+# 2. LANZAR YERSINIA
+print("\n[*] Abriendo Yersinia...")
+time.sleep(2)
+os.system("yersinia -I")
