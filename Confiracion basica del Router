@@ -1,0 +1,21 @@
+enable
+configure terminal
+hostname vIOS
+enable secret Cisco123!
+service password-encryption
+interface GigabitEthernet0/0
+ description HACIA_SWITCH_CENTRAL
+ ip address 20.24.11.1 255.255.255.0
+ no shutdown
+exit
+line console 0
+ login local
+ logging synchronous
+exit
+
+line vty 0 4
+ login authentication default
+ transport input telnet ssh
+exit
+end
+write memory
