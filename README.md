@@ -447,22 +447,6 @@ interface GigabitEthernet0/1
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 10. 🔐 Configuración RADIUS (AAA)
 La topología implementa autenticación AAA mediante un servidor RADIUS en Windows Server NPS para autenticar los accesos al router y switches vía RADIUS, con fallback local.
 Servidor RADIUS — Windows Server NPS
