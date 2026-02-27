@@ -6,6 +6,17 @@
 
 ---
 
+VIDEO DE YOUTUBE
+
+https://youtu.be/YhGLsdYvCZ0
+
+
+
+
+
+
+
+
 ## 📋 Tabla de Contenido
 
 1. [Objetivo del Script](#1-objetivo-del-script)
