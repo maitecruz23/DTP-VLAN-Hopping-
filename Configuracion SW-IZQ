@@ -1,0 +1,29 @@
+enable
+configure terminal
+hostname SW-IZQ
+enable secret Cisco123!
+service password-encryption
+vlan 10
+ name WINDOWS
+exit
+vlan 99
+ name MANAGEMENT
+exit
+interface vlan 1
+ ip address 20.24.11.3 255.255.255.0
+ no shutdown
+exit
+ip default-gateway 20.24.11.1
+interface GigabitEthernet0/0
+ description HACIA_SW-CENTRAL
+ switchport mode trunk
+ switchport nonegotiate
+exit
+interface GigabitEthernet0/1
+ description HACIA_WINDOWS
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+exit
+end
+write memory
