@@ -445,4 +445,43 @@ interface GigabitEthernet0/1
 
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10. 🔐 Configuración RADIUS (AAA)
+La topología implementa autenticación AAA mediante un servidor RADIUS en Windows Server NPS para autenticar los accesos al router y switches vía RADIUS, con fallback local.
+Servidor RADIUS — Windows Server NPS
+ParámetroValorSistema OperativoWindows Server 2019Dirección IP20.24.11.100Máscara255.255.255.0Gateway20.24.11.1
+Configuración NPS (Network Policy Server)
+ParámetroValorCliente RADIUSRouter_CiscoIP del cliente20.24.11.1Shared Secretcisco123Puerto autenticación1812Puerto contabilidad1813
+Usuario RADIUS creado
+ParámetroValorUsernameadmin_radiusPasswordAdmin123!GrupoAdministratorsDial-inAllow Access
+Configuración del Router (AAA)
+ciscoradius server Servidor_Windows
+ address ipv4 20.24.11.100 auth-port 1812 acct-port 1813
+ key cisco123
+
+aaa new-model
+aaa authentication login default group radius local
+aaa authorization exec default group radius local if-authenticated
+Verificación
+ciscotest aaa group radius admin_radius Admin123! legacy
+show aaa servers
+show aaa sessions
+
 > ⚠️ **Aviso Legal:** Este laboratorio fue realizado en un entorno controlado y simulado con fines exclusivamente educativos en el marco del curso de Seguridad en Redes del ITLA. La ejecución de estos ataques en redes reales sin autorización expresa es ilegal y está penada por la ley.
