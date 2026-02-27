@@ -1,0 +1,34 @@
+# Configuración RADIUS - Windows Server NPS
+
+## Servidor RADIUS
+- Sistema Operativo: Windows Server 2019
+- IP: 20.24.11.100
+- Máscara: 255.255.255.0
+- Gateway: 20.24.11.1
+
+## Configuración NPS
+- Cliente RADIUS: Router_Cisco
+- IP del cliente: 20.24.11.1
+- Shared Secret: cisco123
+- Puerto autenticación: 1812
+- Puerto contabilidad: 1813
+
+## Usuario RADIUS creado
+- Username: admin_radius
+- Password: Admin123!
+- Grupo: Administrators
+- Dial-in: Allow Access
+
+## Configuración Router (AAA)
+radius server Servidor_Windows
+ address ipv4 20.24.11.100 auth-port 1812 acct-port 1813
+ key cisco123
+
+aaa new-model
+aaa authentication login default group radius local
+aaa authorization exec default group radius local if-authenticated
+
+## Verificación
+test aaa group radius admin_radius Admin123! legacy
+show aaa servers
+show aaa sessions
